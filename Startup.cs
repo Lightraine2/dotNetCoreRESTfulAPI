@@ -10,6 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using NSwag.AspNetCore;
+using Microsoft.AspNetCore.Mvc.Versioning;
+using dotNetCoreRESTfulAPI.Filters;
 
 namespace dotNetCoreRESTfulAPI
 {
@@ -25,10 +28,27 @@ namespace dotNetCoreRESTfulAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
             services
-                .AddRouting(options => options.LowercaseUrls = true);
+            .AddMvc(options => {
+                options.Filters.Add<JsonExceptionFilter>();
+            })
+            
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddRouting(options => options.LowercaseUrls = true);
+
+  
+
+            services.AddSwaggerDocument();
+
+            services.AddApiVersioning(options => 
+            {
+                options.DefaultApiVersion = new ApiVersion(1,0);
+                options.ApiVersionReader = new MediaTypeApiVersionReader(); 
+                options.AssumeDefaultVersionWhenUnspecified = true;  
+                options.ReportApiVersions = true;
+                options.ApiVersionSelector = new CurrentImplementationApiVersionSelector(options);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,12 +57,14 @@ namespace dotNetCoreRESTfulAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                
             }
             else
             {
                 app.UseHsts();
             }
-
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
             app.UseHttpsRedirection();
             app.UseMvc();
         }
