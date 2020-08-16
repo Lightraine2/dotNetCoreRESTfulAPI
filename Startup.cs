@@ -29,25 +29,36 @@ namespace dotNetCoreRESTfulAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services
-            .AddMvc(options => {
+            .AddMvc(options =>
+            {
                 options.Filters.Add<JsonExceptionFilter>();
+                options.Filters.Add<RequireHttpsOrCloseAttribute>();
             })
-            
+
             .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddRouting(options => options.LowercaseUrls = true);
 
-  
+
 
             services.AddSwaggerDocument();
 
-            services.AddApiVersioning(options => 
+            services.AddApiVersioning(options =>
             {
-                options.DefaultApiVersion = new ApiVersion(1,0);
-                options.ApiVersionReader = new MediaTypeApiVersionReader(); 
-                options.AssumeDefaultVersionWhenUnspecified = true;  
+                options.DefaultApiVersion = new ApiVersion(1, 0);
+                options.ApiVersionReader = new MediaTypeApiVersionReader();
+                options.AssumeDefaultVersionWhenUnspecified = true;
                 options.ReportApiVersions = true;
                 options.ApiVersionSelector = new CurrentImplementationApiVersionSelector(options);
+            });
+
+            //CORS
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowMyApp",
+                policy => policy
+                    .WithOrigins("https://example.com"));
             });
         }
 
@@ -57,15 +68,15 @@ namespace dotNetCoreRESTfulAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                
+
             }
             else
             {
                 app.UseHsts();
             }
+            app.UseCors("AllowMyApp");
             app.UseOpenApi();
             app.UseSwaggerUi3();
-            app.UseHttpsRedirection();
             app.UseMvc();
         }
     }
