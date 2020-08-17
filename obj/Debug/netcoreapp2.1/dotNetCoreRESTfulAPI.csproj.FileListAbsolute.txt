@@ -5,11 +5,8 @@ C:\Users\laure\Desktop\Development\C#\dotNetCoreRESTfulAPI\bin\Debug\netcoreapp2
 C:\Users\laure\Desktop\Development\C#\dotNetCoreRESTfulAPI\bin\Debug\netcoreapp2.1\dotNetCoreRESTfulAPI.pdb
 C:\Users\laure\Desktop\Development\C#\dotNetCoreRESTfulAPI\obj\Debug\netcoreapp2.1\dotNetCoreRESTfulAPI.csprojAssemblyReference.cache
 C:\Users\laure\Desktop\Development\C#\dotNetCoreRESTfulAPI\obj\Debug\netcoreapp2.1\dotNetCoreRESTfulAPI.csproj.CoreCompileInputs.cache
-C:\Users\laure\Desktop\Development\C#\dotNetCoreRESTfulAPI\obj\Debug\netcoreapp2.1\dotNetCoreRESTfulAPI.RazorAssemblyInfo.cache
-C:\Users\laure\Desktop\Development\C#\dotNetCoreRESTfulAPI\obj\Debug\netcoreapp2.1\dotNetCoreRESTfulAPI.RazorAssemblyInfo.cs
 C:\Users\laure\Desktop\Development\C#\dotNetCoreRESTfulAPI\obj\Debug\netcoreapp2.1\dotNetCoreRESTfulAPI.AssemblyInfoInputs.cache
 C:\Users\laure\Desktop\Development\C#\dotNetCoreRESTfulAPI\obj\Debug\netcoreapp2.1\dotNetCoreRESTfulAPI.AssemblyInfo.cs
-C:\Users\laure\Desktop\Development\C#\dotNetCoreRESTfulAPI\obj\Debug\netcoreapp2.1\dotNetCoreRESTfulAPI.RazorTargetAssemblyInfo.cache
 C:\Users\laure\Desktop\Development\C#\dotNetCoreRESTfulAPI\obj\Debug\netcoreapp2.1\dotNetCoreRESTfulAPI.dll
 C:\Users\laure\Desktop\Development\C#\dotNetCoreRESTfulAPI\obj\Debug\netcoreapp2.1\dotNetCoreRESTfulAPI.pdb
 C:\Users\laure\Desktop\Development\dotNetCoreRESTfulAPI\obj\Debug\netcoreapp2.1\dotNetCoreRESTfulAPI.csprojAssemblyReference.cache

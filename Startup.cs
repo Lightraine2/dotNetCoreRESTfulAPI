@@ -14,6 +14,7 @@ using NSwag.AspNetCore;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using dotNetCoreRESTfulAPI.Filters;
 using dotNetCoreRESTfulAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace dotNetCoreRESTfulAPI
 {
@@ -31,6 +32,13 @@ namespace dotNetCoreRESTfulAPI
         {
             services.Configure<HotelInfo>(
                 Configuration.GetSection("Info")
+            );
+
+            // use in memory db for dev/testing
+            //TODO - get real db. 
+
+            services.AddDbContext<HotelApiDbContext>(
+                options => options.UseInMemoryDatabase("testdb")
             );
             services
             .AddMvc(options =>

@@ -1797,7 +1797,7 @@
     ],
     "CSharpLanguageVersion": 703
   },
-  "RootNamespace": "dotNetCoreRESTfulAPI",
+  "RootNamespace": null,
   "Documents": [],
   "SerializationFormat": "0.2"
 }
