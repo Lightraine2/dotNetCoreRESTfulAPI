@@ -2,19 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using dotNetCoreRESTfulAPI.Filters;
+using dotNetCoreRESTfulAPI.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using NSwag.AspNetCore;
-using Microsoft.AspNetCore.Mvc.Versioning;
-using dotNetCoreRESTfulAPI.Filters;
-using dotNetCoreRESTfulAPI.Models;
 using Microsoft.EntityFrameworkCore;
+using NSwag.AspNetCore;
+using dotNetCoreRESTfulAPI.Services;
+using AutoMapper;
+using dotNetCoreRESTfulAPI.Infrastructure;
 
 namespace dotNetCoreRESTfulAPI
 {
@@ -34,6 +37,7 @@ namespace dotNetCoreRESTfulAPI
                 Configuration.GetSection("Info")
             );
 
+            services.AddScoped<IRoomService, DefaultRoomService>();
             // use in memory db for dev/testing
             //TODO - get real db. 
 
@@ -64,6 +68,9 @@ namespace dotNetCoreRESTfulAPI
                 options.ApiVersionSelector = new CurrentImplementationApiVersionSelector(options);
             });
 
+            services.AddAutoMapper(
+                options => options.AddProfile<MappingProfile>()
+            );
             //CORS
 
             services.AddCors(options =>

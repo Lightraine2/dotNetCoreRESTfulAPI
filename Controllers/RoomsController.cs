@@ -1,20 +1,41 @@
+using dotNetCoreRESTfulAPI.Models;
+using dotNetCoreRESTfulAPI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-
 
 namespace dotNetCoreRESTfulAPI.Controllers
 {
-  [Route("/[controller]")]
-  [ApiController]
-  public class RoomsController : ControllerBase
-  {
-    [HttpGet(Name = nameof(GetRooms))]
-    public IActionResult GetRooms()
+    [Route("/[controller]")]
+    [ApiController]
+    public class RoomsController : ControllerBase
     {
-      throw new NotImplementedException();
+        private readonly IRoomService _roomService;
+
+        public RoomsController(IRoomService roomService)
+        {
+            _roomService = roomService;
+        }
+
+        [HttpGet(Name = nameof(GetRooms))]
+        public IActionResult GetRooms()
+        {
+            throw new NotImplementedException();
+        }
+
+        // GET /rooms/{roomId}
+        [HttpGet("{roomId}", Name = nameof(GetRoomById))]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(200)]
+        public async Task<ActionResult<Room>> GetRoomById(Guid roomId)
+        {
+            var room = await _roomService.GetRoomAsync(roomId);
+            if (room == null) return NotFound();
+
+            return room;
+        }
     }
-  }
 }
